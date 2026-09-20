@@ -1,11 +1,62 @@
 {
-  "players": [],
+  "players": [
+    {
+      "id": "ff7ad486-ccfb-4385-839c-cb40db60f7b8",
+      "name": "Matt Takagi",
+      "number": "",
+      "throws": "R",
+      "bats": "L",
+      "primaryPosition": "P",
+      "active": true,
+      "createdAt": "2026-09-20T09:52:57.558Z"
+    },
+    {
+      "id": "a5aa3133-0aea-4735-8be7-e6ca30cab6e6",
+      "name": "Octavian Yuen",
+      "number": "",
+      "throws": "R",
+      "bats": "R",
+      "primaryPosition": "1B",
+      "active": true,
+      "createdAt": "2026-09-20T09:53:07.500Z"
+    },
+    {
+      "id": "8991e2bf-4e4a-4033-a288-03857c8a40fd",
+      "name": "Kian Naini",
+      "number": "",
+      "throws": "R",
+      "bats": "R",
+      "primaryPosition": "SS",
+      "active": true,
+      "createdAt": "2026-09-20T09:53:13.074Z"
+    },
+    {
+      "id": "1047d695-7d9d-456b-b4f8-ba8696cea434",
+      "name": "Chris Song",
+      "number": "",
+      "throws": "R",
+      "bats": "R",
+      "primaryPosition": "LCF",
+      "active": true,
+      "createdAt": "2026-09-20T09:53:24.724Z"
+    },
+    {
+      "id": "aed4ddc3-7bfa-4ad2-9192-cedf7cc2d6a5",
+      "name": "Aniketh Eswara",
+      "number": "",
+      "throws": "R",
+      "bats": "R",
+      "primaryPosition": "3B",
+      "active": true,
+      "createdAt": "2026-09-20T10:09:22.821Z"
+    }
+  ],
   "games": [
     {
-      "id": "442d3868-862e-489f-b502-e76394a5192b",
-      "opponentName": "Eigenballers",
+      "id": "be12ec85-d82b-4f2f-b168-9147ea341681",
+      "opponentName": "KAPLiT",
       "startsAt": "2026-09-21T00:00:00.000Z",
-      "location": "Maxwell",
+      "location": "Maxwell Field",
       "notes": "",
       "isHome": true,
       "inningsScheduled": 7,
@@ -13,53 +64,53 @@
       "ourLineup": [],
       "theirLineup": [
         {
-          "id": "442d3868-862e-489f-b502-e76394a5192b-opp-1",
-          "name": "Opp 1",
+          "id": "be12ec85-d82b-4f2f-b168-9147ea341681-opp-1",
+          "name": "Opponent",
           "order": 1
         },
         {
-          "id": "442d3868-862e-489f-b502-e76394a5192b-opp-2",
-          "name": "Opp 2",
+          "id": "be12ec85-d82b-4f2f-b168-9147ea341681-opp-2",
+          "name": "Opponent",
           "order": 2
         },
         {
-          "id": "442d3868-862e-489f-b502-e76394a5192b-opp-3",
-          "name": "Opp 3",
+          "id": "be12ec85-d82b-4f2f-b168-9147ea341681-opp-3",
+          "name": "Opponent",
           "order": 3
         },
         {
-          "id": "442d3868-862e-489f-b502-e76394a5192b-opp-4",
-          "name": "Opp 4",
+          "id": "be12ec85-d82b-4f2f-b168-9147ea341681-opp-4",
+          "name": "Opponent",
           "order": 4
         },
         {
-          "id": "442d3868-862e-489f-b502-e76394a5192b-opp-5",
-          "name": "Opp 5",
+          "id": "be12ec85-d82b-4f2f-b168-9147ea341681-opp-5",
+          "name": "Opponent",
           "order": 5
         },
         {
-          "id": "442d3868-862e-489f-b502-e76394a5192b-opp-6",
-          "name": "Opp 6",
+          "id": "be12ec85-d82b-4f2f-b168-9147ea341681-opp-6",
+          "name": "Opponent",
           "order": 6
         },
         {
-          "id": "442d3868-862e-489f-b502-e76394a5192b-opp-7",
-          "name": "Opp 7",
+          "id": "be12ec85-d82b-4f2f-b168-9147ea341681-opp-7",
+          "name": "Opponent",
           "order": 7
         },
         {
-          "id": "442d3868-862e-489f-b502-e76394a5192b-opp-8",
-          "name": "Opp 8",
+          "id": "be12ec85-d82b-4f2f-b168-9147ea341681-opp-8",
+          "name": "Opponent",
           "order": 8
         },
         {
-          "id": "442d3868-862e-489f-b502-e76394a5192b-opp-9",
-          "name": "Opp 9",
+          "id": "be12ec85-d82b-4f2f-b168-9147ea341681-opp-9",
+          "name": "Opponent",
           "order": 9
         },
         {
-          "id": "442d3868-862e-489f-b502-e76394a5192b-opp-10",
-          "name": "Opp 10",
+          "id": "be12ec85-d82b-4f2f-b168-9147ea341681-opp-10",
+          "name": "Opponent",
           "order": 10
         }
       ],
@@ -81,7 +132,607 @@
         "theirKickerIndex": 0,
         "pitches": []
       },
-      "createdAt": "2026-09-20T09:51:28.067Z"
+      "createdAt": "2026-09-20T10:02:56.922Z"
+    },
+    {
+      "id": "f5feeccc-ec3e-48a5-adb3-0615d5346768",
+      "opponentName": "ballERchen",
+      "startsAt": "2026-09-27T23:00:00.000Z",
+      "location": "Maxwell Field",
+      "notes": "",
+      "isHome": false,
+      "inningsScheduled": 7,
+      "status": "scheduled",
+      "ourLineup": [],
+      "theirLineup": [
+        {
+          "id": "f5feeccc-ec3e-48a5-adb3-0615d5346768-opp-1",
+          "name": "Opponent",
+          "order": 1
+        },
+        {
+          "id": "f5feeccc-ec3e-48a5-adb3-0615d5346768-opp-2",
+          "name": "Opponent",
+          "order": 2
+        },
+        {
+          "id": "f5feeccc-ec3e-48a5-adb3-0615d5346768-opp-3",
+          "name": "Opponent",
+          "order": 3
+        },
+        {
+          "id": "f5feeccc-ec3e-48a5-adb3-0615d5346768-opp-4",
+          "name": "Opponent",
+          "order": 4
+        },
+        {
+          "id": "f5feeccc-ec3e-48a5-adb3-0615d5346768-opp-5",
+          "name": "Opponent",
+          "order": 5
+        },
+        {
+          "id": "f5feeccc-ec3e-48a5-adb3-0615d5346768-opp-6",
+          "name": "Opponent",
+          "order": 6
+        },
+        {
+          "id": "f5feeccc-ec3e-48a5-adb3-0615d5346768-opp-7",
+          "name": "Opponent",
+          "order": 7
+        },
+        {
+          "id": "f5feeccc-ec3e-48a5-adb3-0615d5346768-opp-8",
+          "name": "Opponent",
+          "order": 8
+        },
+        {
+          "id": "f5feeccc-ec3e-48a5-adb3-0615d5346768-opp-9",
+          "name": "Opponent",
+          "order": 9
+        },
+        {
+          "id": "f5feeccc-ec3e-48a5-adb3-0615d5346768-opp-10",
+          "name": "Opponent",
+          "order": 10
+        }
+      ],
+      "pitcherId": null,
+      "state": {
+        "inning": 1,
+        "half": "top",
+        "outs": 0,
+        "balls": 0,
+        "strikes": 0,
+        "ourScore": 0,
+        "theirScore": 0,
+        "bases": {
+          "1": null,
+          "2": null,
+          "3": null
+        },
+        "ourKickerIndex": 0,
+        "theirKickerIndex": 0,
+        "pitches": []
+      },
+      "createdAt": "2026-09-20T10:03:51.120Z"
+    },
+    {
+      "id": "97de1c7c-b518-4b3c-aa65-5f712cd17eb4",
+      "opponentName": "BuntDemons",
+      "startsAt": "2026-10-05T00:00:00.000Z",
+      "location": "Maxwell Field",
+      "notes": "",
+      "isHome": true,
+      "inningsScheduled": 7,
+      "status": "scheduled",
+      "ourLineup": [],
+      "theirLineup": [
+        {
+          "id": "97de1c7c-b518-4b3c-aa65-5f712cd17eb4-opp-1",
+          "name": "Opponent",
+          "order": 1
+        },
+        {
+          "id": "97de1c7c-b518-4b3c-aa65-5f712cd17eb4-opp-2",
+          "name": "Opponent",
+          "order": 2
+        },
+        {
+          "id": "97de1c7c-b518-4b3c-aa65-5f712cd17eb4-opp-3",
+          "name": "Opponent",
+          "order": 3
+        },
+        {
+          "id": "97de1c7c-b518-4b3c-aa65-5f712cd17eb4-opp-4",
+          "name": "Opponent",
+          "order": 4
+        },
+        {
+          "id": "97de1c7c-b518-4b3c-aa65-5f712cd17eb4-opp-5",
+          "name": "Opponent",
+          "order": 5
+        },
+        {
+          "id": "97de1c7c-b518-4b3c-aa65-5f712cd17eb4-opp-6",
+          "name": "Opponent",
+          "order": 6
+        },
+        {
+          "id": "97de1c7c-b518-4b3c-aa65-5f712cd17eb4-opp-7",
+          "name": "Opponent",
+          "order": 7
+        },
+        {
+          "id": "97de1c7c-b518-4b3c-aa65-5f712cd17eb4-opp-8",
+          "name": "Opponent",
+          "order": 8
+        },
+        {
+          "id": "97de1c7c-b518-4b3c-aa65-5f712cd17eb4-opp-9",
+          "name": "Opponent",
+          "order": 9
+        },
+        {
+          "id": "97de1c7c-b518-4b3c-aa65-5f712cd17eb4-opp-10",
+          "name": "Opponent",
+          "order": 10
+        }
+      ],
+      "pitcherId": null,
+      "state": {
+        "inning": 1,
+        "half": "top",
+        "outs": 0,
+        "balls": 0,
+        "strikes": 0,
+        "ourScore": 0,
+        "theirScore": 0,
+        "bases": {
+          "1": null,
+          "2": null,
+          "3": null
+        },
+        "ourKickerIndex": 0,
+        "theirKickerIndex": 0,
+        "pitches": []
+      },
+      "createdAt": "2026-09-20T10:04:26.274Z"
+    },
+    {
+      "id": "ee23c662-275a-4f3e-88bc-c8c527ce2f8d",
+      "opponentName": "KAPLiT",
+      "startsAt": "2026-10-11T23:00:00.000Z",
+      "location": "Maxwell Field",
+      "notes": "",
+      "isHome": false,
+      "inningsScheduled": 7,
+      "status": "scheduled",
+      "ourLineup": [],
+      "theirLineup": [
+        {
+          "id": "ee23c662-275a-4f3e-88bc-c8c527ce2f8d-opp-1",
+          "name": "Opponent",
+          "order": 1
+        },
+        {
+          "id": "ee23c662-275a-4f3e-88bc-c8c527ce2f8d-opp-2",
+          "name": "Opponent",
+          "order": 2
+        },
+        {
+          "id": "ee23c662-275a-4f3e-88bc-c8c527ce2f8d-opp-3",
+          "name": "Opponent",
+          "order": 3
+        },
+        {
+          "id": "ee23c662-275a-4f3e-88bc-c8c527ce2f8d-opp-4",
+          "name": "Opponent",
+          "order": 4
+        },
+        {
+          "id": "ee23c662-275a-4f3e-88bc-c8c527ce2f8d-opp-5",
+          "name": "Opponent",
+          "order": 5
+        },
+        {
+          "id": "ee23c662-275a-4f3e-88bc-c8c527ce2f8d-opp-6",
+          "name": "Opponent",
+          "order": 6
+        },
+        {
+          "id": "ee23c662-275a-4f3e-88bc-c8c527ce2f8d-opp-7",
+          "name": "Opponent",
+          "order": 7
+        },
+        {
+          "id": "ee23c662-275a-4f3e-88bc-c8c527ce2f8d-opp-8",
+          "name": "Opponent",
+          "order": 8
+        },
+        {
+          "id": "ee23c662-275a-4f3e-88bc-c8c527ce2f8d-opp-9",
+          "name": "Opponent",
+          "order": 9
+        },
+        {
+          "id": "ee23c662-275a-4f3e-88bc-c8c527ce2f8d-opp-10",
+          "name": "Opponent",
+          "order": 10
+        }
+      ],
+      "pitcherId": null,
+      "state": {
+        "inning": 1,
+        "half": "top",
+        "outs": 0,
+        "balls": 0,
+        "strikes": 0,
+        "ourScore": 0,
+        "theirScore": 0,
+        "bases": {
+          "1": null,
+          "2": null,
+          "3": null
+        },
+        "ourKickerIndex": 0,
+        "theirKickerIndex": 0,
+        "pitches": []
+      },
+      "createdAt": "2026-09-20T10:05:01.367Z"
+    },
+    {
+      "id": "220c44cc-84e7-4097-8624-96ac896eaaaa",
+      "opponentName": "BuntDemons",
+      "startsAt": "2026-10-18T23:00:00.000Z",
+      "location": "Maxwell Field",
+      "notes": "",
+      "isHome": false,
+      "inningsScheduled": 7,
+      "status": "scheduled",
+      "ourLineup": [],
+      "theirLineup": [
+        {
+          "id": "220c44cc-84e7-4097-8624-96ac896eaaaa-opp-1",
+          "name": "Opponent",
+          "order": 1
+        },
+        {
+          "id": "220c44cc-84e7-4097-8624-96ac896eaaaa-opp-2",
+          "name": "Opponent",
+          "order": 2
+        },
+        {
+          "id": "220c44cc-84e7-4097-8624-96ac896eaaaa-opp-3",
+          "name": "Opponent",
+          "order": 3
+        },
+        {
+          "id": "220c44cc-84e7-4097-8624-96ac896eaaaa-opp-4",
+          "name": "Opponent",
+          "order": 4
+        },
+        {
+          "id": "220c44cc-84e7-4097-8624-96ac896eaaaa-opp-5",
+          "name": "Opponent",
+          "order": 5
+        },
+        {
+          "id": "220c44cc-84e7-4097-8624-96ac896eaaaa-opp-6",
+          "name": "Opponent",
+          "order": 6
+        },
+        {
+          "id": "220c44cc-84e7-4097-8624-96ac896eaaaa-opp-7",
+          "name": "Opponent",
+          "order": 7
+        },
+        {
+          "id": "220c44cc-84e7-4097-8624-96ac896eaaaa-opp-8",
+          "name": "Opponent",
+          "order": 8
+        },
+        {
+          "id": "220c44cc-84e7-4097-8624-96ac896eaaaa-opp-9",
+          "name": "Opponent",
+          "order": 9
+        },
+        {
+          "id": "220c44cc-84e7-4097-8624-96ac896eaaaa-opp-10",
+          "name": "Opponent",
+          "order": 10
+        }
+      ],
+      "pitcherId": null,
+      "state": {
+        "inning": 1,
+        "half": "top",
+        "outs": 0,
+        "balls": 0,
+        "strikes": 0,
+        "ourScore": 0,
+        "theirScore": 0,
+        "bases": {
+          "1": null,
+          "2": null,
+          "3": null
+        },
+        "ourKickerIndex": 0,
+        "theirKickerIndex": 0,
+        "pitches": []
+      },
+      "createdAt": "2026-09-20T10:05:45.874Z"
+    },
+    {
+      "id": "682a2470-f542-44a9-9cc0-5ea8f224ba84",
+      "opponentName": "ballERchen",
+      "startsAt": "2026-10-25T23:00:00.000Z",
+      "location": "Maxwell Field",
+      "notes": "",
+      "isHome": true,
+      "inningsScheduled": 7,
+      "status": "scheduled",
+      "ourLineup": [],
+      "theirLineup": [
+        {
+          "id": "682a2470-f542-44a9-9cc0-5ea8f224ba84-opp-1",
+          "name": "Opponent",
+          "order": 1
+        },
+        {
+          "id": "682a2470-f542-44a9-9cc0-5ea8f224ba84-opp-2",
+          "name": "Opponent",
+          "order": 2
+        },
+        {
+          "id": "682a2470-f542-44a9-9cc0-5ea8f224ba84-opp-3",
+          "name": "Opponent",
+          "order": 3
+        },
+        {
+          "id": "682a2470-f542-44a9-9cc0-5ea8f224ba84-opp-4",
+          "name": "Opponent",
+          "order": 4
+        },
+        {
+          "id": "682a2470-f542-44a9-9cc0-5ea8f224ba84-opp-5",
+          "name": "Opponent",
+          "order": 5
+        },
+        {
+          "id": "682a2470-f542-44a9-9cc0-5ea8f224ba84-opp-6",
+          "name": "Opponent",
+          "order": 6
+        },
+        {
+          "id": "682a2470-f542-44a9-9cc0-5ea8f224ba84-opp-7",
+          "name": "Opponent",
+          "order": 7
+        },
+        {
+          "id": "682a2470-f542-44a9-9cc0-5ea8f224ba84-opp-8",
+          "name": "Opponent",
+          "order": 8
+        },
+        {
+          "id": "682a2470-f542-44a9-9cc0-5ea8f224ba84-opp-9",
+          "name": "Opponent",
+          "order": 9
+        },
+        {
+          "id": "682a2470-f542-44a9-9cc0-5ea8f224ba84-opp-10",
+          "name": "Opponent",
+          "order": 10
+        }
+      ],
+      "pitcherId": null,
+      "state": {
+        "inning": 1,
+        "half": "top",
+        "outs": 0,
+        "balls": 0,
+        "strikes": 0,
+        "ourScore": 0,
+        "theirScore": 0,
+        "bases": {
+          "1": null,
+          "2": null,
+          "3": null
+        },
+        "ourKickerIndex": 0,
+        "theirKickerIndex": 0,
+        "pitches": []
+      },
+      "createdAt": "2026-09-20T10:07:20.622Z"
+    },
+    {
+      "id": "53f755f6-53ed-452f-b6e4-16a5c3c37328",
+      "opponentName": "BuntDemons",
+      "startsAt": "2026-11-02T00:00:00.000Z",
+      "location": "Maxwell Field",
+      "notes": "",
+      "isHome": true,
+      "inningsScheduled": 7,
+      "status": "scheduled",
+      "ourLineup": [],
+      "theirLineup": [
+        {
+          "id": "53f755f6-53ed-452f-b6e4-16a5c3c37328-opp-1",
+          "name": "Opponent",
+          "order": 1
+        },
+        {
+          "id": "53f755f6-53ed-452f-b6e4-16a5c3c37328-opp-2",
+          "name": "Opponent",
+          "order": 2
+        },
+        {
+          "id": "53f755f6-53ed-452f-b6e4-16a5c3c37328-opp-3",
+          "name": "Opponent",
+          "order": 3
+        },
+        {
+          "id": "53f755f6-53ed-452f-b6e4-16a5c3c37328-opp-4",
+          "name": "Opponent",
+          "order": 4
+        },
+        {
+          "id": "53f755f6-53ed-452f-b6e4-16a5c3c37328-opp-5",
+          "name": "Opponent",
+          "order": 5
+        },
+        {
+          "id": "53f755f6-53ed-452f-b6e4-16a5c3c37328-opp-6",
+          "name": "Opponent",
+          "order": 6
+        },
+        {
+          "id": "53f755f6-53ed-452f-b6e4-16a5c3c37328-opp-7",
+          "name": "Opponent",
+          "order": 7
+        },
+        {
+          "id": "53f755f6-53ed-452f-b6e4-16a5c3c37328-opp-8",
+          "name": "Opponent",
+          "order": 8
+        },
+        {
+          "id": "53f755f6-53ed-452f-b6e4-16a5c3c37328-opp-9",
+          "name": "Opponent",
+          "order": 9
+        },
+        {
+          "id": "53f755f6-53ed-452f-b6e4-16a5c3c37328-opp-10",
+          "name": "Opponent",
+          "order": 10
+        }
+      ],
+      "pitcherId": null,
+      "state": {
+        "inning": 1,
+        "half": "top",
+        "outs": 0,
+        "balls": 0,
+        "strikes": 0,
+        "ourScore": 0,
+        "theirScore": 0,
+        "bases": {
+          "1": null,
+          "2": null,
+          "3": null
+        },
+        "ourKickerIndex": 0,
+        "theirKickerIndex": 0,
+        "pitches": []
+      },
+      "createdAt": "2026-09-20T10:07:53.668Z"
+    },
+    {
+      "id": "223d3fc7-642c-4172-9b4c-fcfedf811781",
+      "opponentName": "Test",
+      "startsAt": "2026-09-20T01:00:00.000Z",
+      "location": "Maxwell Field",
+      "notes": "",
+      "isHome": true,
+      "inningsScheduled": 7,
+      "status": "scheduled",
+      "ourLineup": [
+        {
+          "playerId": "ff7ad486-ccfb-4385-839c-cb40db60f7b8",
+          "order": 1,
+          "position": "P"
+        },
+        {
+          "playerId": "a5aa3133-0aea-4735-8be7-e6ca30cab6e6",
+          "order": 2,
+          "position": "1B"
+        },
+        {
+          "playerId": "8991e2bf-4e4a-4033-a288-03857c8a40fd",
+          "order": 3,
+          "position": "SS"
+        },
+        {
+          "playerId": "1047d695-7d9d-456b-b4f8-ba8696cea434",
+          "order": 4,
+          "position": "LCF"
+        },
+        {
+          "playerId": "aed4ddc3-7bfa-4ad2-9192-cedf7cc2d6a5",
+          "order": 5,
+          "position": "3B"
+        }
+      ],
+      "theirLineup": [
+        {
+          "id": "223d3fc7-642c-4172-9b4c-fcfedf811781-opp-1",
+          "name": "Opp 1",
+          "order": 1
+        },
+        {
+          "id": "223d3fc7-642c-4172-9b4c-fcfedf811781-opp-2",
+          "name": "Opp 2",
+          "order": 2
+        },
+        {
+          "id": "223d3fc7-642c-4172-9b4c-fcfedf811781-opp-3",
+          "name": "Opp 3",
+          "order": 3
+        },
+        {
+          "id": "223d3fc7-642c-4172-9b4c-fcfedf811781-opp-4",
+          "name": "Opp 4",
+          "order": 4
+        },
+        {
+          "id": "223d3fc7-642c-4172-9b4c-fcfedf811781-opp-5",
+          "name": "Opp 5",
+          "order": 5
+        },
+        {
+          "id": "223d3fc7-642c-4172-9b4c-fcfedf811781-opp-6",
+          "name": "Opp 6",
+          "order": 6
+        },
+        {
+          "id": "223d3fc7-642c-4172-9b4c-fcfedf811781-opp-7",
+          "name": "Opp 7",
+          "order": 7
+        },
+        {
+          "id": "223d3fc7-642c-4172-9b4c-fcfedf811781-opp-8",
+          "name": "Opp 8",
+          "order": 8
+        },
+        {
+          "id": "223d3fc7-642c-4172-9b4c-fcfedf811781-opp-9",
+          "name": "Opp 9",
+          "order": 9
+        },
+        {
+          "id": "223d3fc7-642c-4172-9b4c-fcfedf811781-opp-10",
+          "name": "Opp 10",
+          "order": 10
+        }
+      ],
+      "pitcherId": "ff7ad486-ccfb-4385-839c-cb40db60f7b8",
+      "state": {
+        "inning": 1,
+        "half": "top",
+        "outs": 0,
+        "balls": 0,
+        "strikes": 0,
+        "ourScore": 0,
+        "theirScore": 0,
+        "bases": {
+          "1": null,
+          "2": null,
+          "3": null
+        },
+        "ourKickerIndex": 0,
+        "theirKickerIndex": 0,
+        "pitches": []
+      },
+      "createdAt": "2026-09-20T10:13:00.078Z"
     }
   ],
   "plays": []
