@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Geist } from "next/font/google";
+import { Inter } from "next/font/google";
 import { ThemeProvider } from "next-themes";
 import { Suspense } from "react";
 import { SiteHeader } from "@/components/site-header";
@@ -16,10 +16,9 @@ export const metadata: Metadata = {
   description: "Schedule, live scoring, and stats for SAGB IM kickball",
 };
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  display: "swap",
+const inter = Inter({
   subsets: ["latin"],
+  display: "swap",
 });
 
 async function Header() {
@@ -34,7 +33,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={`${geistSans.className} min-h-screen antialiased`}>
+      <body className={`${inter.className} min-h-screen antialiased`}>
         <ThemeProvider
           attribute="class"
           defaultTheme="system"

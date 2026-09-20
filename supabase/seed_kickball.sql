@@ -1,4 +1,5 @@
-{
+update public.kickball_store
+set data = $kickball${
   "players": [
     {
       "id": "ff7ad486-ccfb-4385-839c-cb40db60f7b8",
@@ -736,4 +737,12 @@
     }
   ],
   "plays": []
-}
+}$kickball$::jsonb,
+    updated_at = now()
+where id = 1;
+
+select id,
+       jsonb_array_length(data->'players') as players,
+       jsonb_array_length(data->'games') as games
+from public.kickball_store
+where id = 1;

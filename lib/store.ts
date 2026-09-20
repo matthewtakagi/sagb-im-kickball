@@ -1,41 +1,75 @@
-import { promises as fs } from "fs";
-import path from "path";
 import { connection } from "next/server";
+import seedData from "@/data/store.json";
+import { createAdminClient, hasServiceRoleKey } from "@/lib/supabase/admin";
 import { initialState, type Game, type Play, type Player, type StoreData } from "./kickball/types";
-
-const FILE = path.join(process.cwd(), "data", "store.json");
 
 const empty: StoreData = { players: [], games: [], plays: [] };
 
 let writeChain: Promise<unknown> = Promise.resolve();
+let didSeed = false;
 
-async function ensureFile() {
-  await fs.mkdir(path.dirname(FILE), { recursive: true });
-  try {
-    await fs.access(FILE);
-  } catch {
-    await fs.writeFile(FILE, JSON.stringify(empty, null, 2));
-  }
+function normalizeStore(parsed: Partial<StoreData> | null | undefined): StoreData {
+  return {
+    players: parsed?.players ?? [],
+    games: parsed?.games ?? [],
+    plays: parsed?.plays ?? [],
+  };
+}
+
+function bundledSeed(): StoreData {
+  return normalizeStore(seedData as StoreData);
+}
+
+function isEmpty(store: StoreData) {
+  return store.players.length === 0 && store.games.length === 0 && store.plays.length === 0;
 }
 
 async function readStore(): Promise<StoreData> {
-  await ensureFile();
-  const raw = await fs.readFile(FILE, "utf8");
-  try {
-    const parsed = JSON.parse(raw) as StoreData;
-    return {
-      players: parsed.players ?? [],
-      games: parsed.games ?? [],
-      plays: parsed.plays ?? [],
-    };
-  } catch {
-    return { ...empty };
+  const supabase = createAdminClient();
+  const { data, error } = await supabase
+    .from("kickball_store")
+    .select("data")
+    .eq("id", 1)
+    .maybeSingle();
+
+  if (error) {
+    throw new Error(
+      `Supabase read failed (${error.message}). Run supabase/migrations/001_kickball_store.sql in the SQL editor, and set SUPABASE_SERVICE_ROLE_KEY for writes.`,
+    );
   }
+
+  const store = normalizeStore((data?.data as StoreData | undefined) ?? empty);
+
+  if (!didSeed && isEmpty(store) && hasServiceRoleKey()) {
+    const seed = bundledSeed();
+    if (!isEmpty(seed)) {
+      await writeStore(seed);
+      didSeed = true;
+      return seed;
+    }
+  }
+
+  didSeed = true;
+  return store;
 }
 
 async function writeStore(store: StoreData) {
-  await ensureFile();
-  await fs.writeFile(FILE, JSON.stringify(store, null, 2));
+  if (!hasServiceRoleKey()) {
+    throw new Error(
+      "Missing SUPABASE_SERVICE_ROLE_KEY. Add the service role key from Supabase → Project Settings → API so scoring can persist on Vercel.",
+    );
+  }
+
+  const supabase = createAdminClient();
+  const { error } = await supabase.from("kickball_store").upsert({
+    id: 1,
+    data: store,
+    updated_at: new Date().toISOString(),
+  });
+
+  if (error) {
+    throw new Error(`Supabase write failed (${error.message}).`);
+  }
 }
 
 export async function getStore(): Promise<StoreData> {
