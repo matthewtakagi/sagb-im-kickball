@@ -8,8 +8,11 @@ import {
   applyPitch,
   replayGame,
 } from "@/lib/kickball/engine";
+import { pacificWallClockToIso } from "@/lib/kickball/datetime";
 import {
   initialState,
+  POSITIONS,
+  type LineupPosition,
   type LineupSlot,
   type OpponentBatter,
   type PAResult,
@@ -37,6 +40,7 @@ function refreshAll(gameId?: string) {
   revalidatePath("/roster");
   revalidatePath("/stats");
   revalidatePath("/admin");
+  revalidatePath("/admin/roster");
   if (gameId) {
     revalidatePath(`/games/${gameId}`);
     revalidatePath(`/admin/games/${gameId}`);
@@ -59,6 +63,15 @@ export async function adminLogoutAction() {
   redirect("/");
 }
 
+function parsePositions(formData: FormData): LineupPosition[] {
+  const allowed = new Set<string>([...POSITIONS, "EH"]);
+  const positions = formData
+    .getAll("positions")
+    .map(String)
+    .filter((pos): pos is LineupPosition => allowed.has(pos));
+  return positions.length ? positions : ["EH"];
+}
+
 export async function createPlayerAction(formData: FormData) {
   await requireAdmin();
   const name = String(formData.get("name") ?? "").trim();
@@ -67,14 +80,30 @@ export async function createPlayerAction(formData: FormData) {
     store.players.push(
       newPlayer({
         name,
-        number: String(formData.get("number") ?? ""),
         throws: formData.get("throws") === "L" ? "L" : "R",
         bats: formData.get("bats") === "L" ? "L" : "R",
-        primaryPosition:
-          (String(formData.get("primaryPosition") ?? "EH") as LineupSlot["position"]) ||
-          "EH",
+        positions: parsePositions(formData),
       }),
     );
+  });
+  refreshAll();
+}
+
+export async function updatePlayerAction(formData: FormData) {
+  await requireAdmin();
+  const id = String(formData.get("id") ?? "");
+  const name = String(formData.get("name") ?? "").trim();
+  if (!name) throw new Error("Name is required.");
+  const positions = parsePositions(formData);
+  await updateStore((store) => {
+    const player = store.players.find((p) => p.id === id);
+    if (!player) throw new Error("Player not found.");
+    player.name = name;
+    player.throws = formData.get("throws") === "L" ? "L" : "R";
+    player.bats = formData.get("bats") === "L" ? "L" : "R";
+    player.positions = positions;
+    player.primaryPosition = positions[0] ?? "EH";
+    player.number = "";
   });
   refreshAll();
 }
@@ -98,7 +127,7 @@ export async function createGameAction(formData: FormData) {
   if (!opponentName || !date) throw new Error("Opponent and date are required.");
   const game = newGame({
     opponentName,
-    startsAt: new Date(`${date}T${time}`).toISOString(),
+    startsAt: pacificWallClockToIso(date, time),
     location: location || "TBD",
     notes: String(formData.get("notes") ?? ""),
     isHome: formData.get("isHome") !== "away",
@@ -172,6 +201,7 @@ export async function finalizeGameAction(gameId: string) {
   await updateStore((store) => {
     const game = store.games.find((g) => g.id === gameId);
     if (!game) throw new Error("Game not found.");
+    if (game.status === "final") return;
     game.status = "final";
   });
   refreshAll(gameId);

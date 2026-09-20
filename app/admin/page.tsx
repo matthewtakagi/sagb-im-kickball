@@ -1,6 +1,8 @@
 import Link from "next/link";
+import { EndGameButton } from "@/components/end-game-button";
 import { Button } from "@/components/ui/button";
 import { requireAdmin } from "@/lib/admin";
+import { formatGameDateTime } from "@/lib/kickball/datetime";
 import { getStore } from "@/lib/store";
 
 export default async function AdminHomePage() {
@@ -28,13 +30,12 @@ export default async function AdminHomePage() {
         <section className="space-y-2">
           <h2 className="font-semibold">Live</h2>
           {live.map((game) => (
-            <Link
-              key={game.id}
-              href={`/admin/games/${game.id}/score`}
-              className="block rounded-xl border p-4 hover:bg-accent"
-            >
-              vs {game.opponentName} · {game.state.ourScore}–{game.state.theirScore}
-            </Link>
+            <div key={game.id} className="flex items-center justify-between gap-3 rounded-xl border p-4">
+              <Link href={`/admin/games/${game.id}/score`} className="min-w-0 flex-1 hover:underline">
+                vs {game.opponentName} · {game.state.ourScore}–{game.state.theirScore}
+              </Link>
+              <EndGameButton gameId={game.id} />
+            </div>
           ))}
         </section>
       ) : null}
@@ -48,7 +49,7 @@ export default async function AdminHomePage() {
               <div>
                 <p className="font-medium">vs {game.opponentName}</p>
                 <p className="text-sm text-muted-foreground">
-                  {new Date(game.startsAt).toLocaleString()}
+                  {formatGameDateTime(game.startsAt)}
                 </p>
               </div>
               <div className="flex gap-2">
@@ -58,6 +59,7 @@ export default async function AdminHomePage() {
                 <Button asChild size="sm">
                   <Link href={`/admin/games/${game.id}/score`}>Score</Link>
                 </Button>
+                <EndGameButton gameId={game.id} />
               </div>
             </div>
           ))

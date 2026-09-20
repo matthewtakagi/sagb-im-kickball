@@ -1,16 +1,34 @@
 import { connection } from "next/server";
 import seedData from "@/data/store.json";
 import { createAdminClient, hasServiceRoleKey } from "@/lib/supabase/admin";
-import { initialState, type Game, type Play, type Player, type StoreData } from "./kickball/types";
+import { hasSupabaseConfig } from "@/lib/supabase/env";
+import {
+  initialState,
+  playerPositions,
+  type Game,
+  type Play,
+  type Player,
+  type StoreData,
+} from "./kickball/types";
 
 const empty: StoreData = { players: [], games: [], plays: [] };
 
 let writeChain: Promise<unknown> = Promise.resolve();
 let didSeed = false;
 
+function normalizePlayer(player: Player): Player {
+  const positions = playerPositions(player);
+  return {
+    ...player,
+    number: player.number ?? "",
+    positions,
+    primaryPosition: positions[0] ?? "EH",
+  };
+}
+
 function normalizeStore(parsed: Partial<StoreData> | null | undefined): StoreData {
   return {
-    players: parsed?.players ?? [],
+    players: (parsed?.players ?? []).map(normalizePlayer),
     games: parsed?.games ?? [],
     plays: parsed?.plays ?? [],
   };
@@ -25,6 +43,10 @@ function isEmpty(store: StoreData) {
 }
 
 async function readStore(): Promise<StoreData> {
+  if (!hasSupabaseConfig()) {
+    return bundledSeed();
+  }
+
   const supabase = createAdminClient();
   const { data, error } = await supabase
     .from("kickball_store")
@@ -33,9 +55,8 @@ async function readStore(): Promise<StoreData> {
     .maybeSingle();
 
   if (error) {
-    throw new Error(
-      `Supabase read failed (${error.message}). Run supabase/migrations/001_kickball_store.sql in the SQL editor, and set SUPABASE_SERVICE_ROLE_KEY for writes.`,
-    );
+    console.error(`Supabase read failed (${error.message}).`);
+    return bundledSeed();
   }
 
   const store = normalizeStore((data?.data as StoreData | undefined) ?? empty);
@@ -128,18 +149,23 @@ export function newGame(partial: {
 
 export function newPlayer(partial: {
   name: string;
-  number?: string;
   throws?: Player["throws"];
   bats?: Player["bats"];
+  positions?: Player["positions"];
   primaryPosition?: Player["primaryPosition"];
 }): Player {
+  const positions = playerPositions({
+    positions: partial.positions,
+    primaryPosition: partial.primaryPosition ?? "EH",
+  });
   return {
     id: crypto.randomUUID(),
     name: partial.name.trim(),
-    number: partial.number?.trim() ?? "",
+    number: "",
     throws: partial.throws ?? "R",
     bats: partial.bats ?? "R",
-    primaryPosition: partial.primaryPosition ?? "EH",
+    positions,
+    primaryPosition: positions[0] ?? "EH",
     active: true,
     createdAt: new Date().toISOString(),
   };

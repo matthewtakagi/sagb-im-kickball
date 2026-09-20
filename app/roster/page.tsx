@@ -1,4 +1,4 @@
-import { POSITION_LABELS } from "@/lib/kickball/labels";
+import { formatPlayerPositions } from "@/lib/kickball/labels";
 import { getStore } from "@/lib/store";
 
 export default async function RosterPage() {
@@ -15,7 +15,6 @@ export default async function RosterPage() {
           <table className="w-full text-left text-sm">
             <thead className="bg-muted/50 text-muted-foreground">
               <tr>
-                <th className="px-3 py-2">#</th>
                 <th className="px-3 py-2">Name</th>
                 <th className="px-3 py-2">Pos</th>
                 <th className="px-3 py-2">B / T</th>
@@ -24,9 +23,8 @@ export default async function RosterPage() {
             <tbody>
               {players.map((p) => (
                 <tr key={p.id} className="border-t">
-                  <td className="px-3 py-2 tabular-nums">{p.number || "—"}</td>
                   <td className="px-3 py-2 font-medium">{p.name}</td>
-                  <td className="px-3 py-2">{POSITION_LABELS[p.primaryPosition]}</td>
+                  <td className="px-3 py-2">{formatPlayerPositions(p)}</td>
                   <td className="px-3 py-2">
                     {p.bats} / {p.throws}
                   </td>

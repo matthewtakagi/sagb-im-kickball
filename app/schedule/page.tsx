@@ -2,6 +2,7 @@ import Link from "next/link";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { isAdmin } from "@/lib/admin";
+import { formatGameDateTime } from "@/lib/kickball/datetime";
 import { TEAM_NAME } from "@/lib/kickball/labels";
 import { getStore } from "@/lib/store";
 
@@ -31,14 +32,7 @@ export default async function SchedulePage() {
                   {TEAM_NAME} {game.isHome ? "vs" : "@"} {game.opponentName}
                 </p>
                 <p className="text-sm text-muted-foreground">
-                  {new Date(game.startsAt).toLocaleString(undefined, {
-                    weekday: "short",
-                    month: "short",
-                    day: "numeric",
-                    hour: "numeric",
-                    minute: "2-digit",
-                  })}{" "}
-                  · {game.location}
+                  {formatGameDateTime(game.startsAt)} · {game.location}
                 </p>
               </div>
               <div className="flex items-center gap-3">

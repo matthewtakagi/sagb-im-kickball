@@ -1,6 +1,7 @@
 import { notFound } from "next/navigation";
 import { LineupForm } from "@/components/lineup-form";
 import { requireAdmin } from "@/lib/admin";
+import { formatGameDateTime } from "@/lib/kickball/datetime";
 import { getStore } from "@/lib/store";
 
 export default async function LineupPage({
@@ -19,7 +20,7 @@ export default async function LineupPage({
       <div>
         <h1 className="text-2xl font-semibold">Lineup vs {game.opponentName}</h1>
         <p className="text-sm text-muted-foreground">
-          {new Date(game.startsAt).toLocaleString()} · {game.location}
+          {formatGameDateTime(game.startsAt)} · {game.location}
         </p>
       </div>
       <LineupForm game={game} players={store.players} />

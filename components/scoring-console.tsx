@@ -6,9 +6,9 @@ import {
   recordPlayAction,
   setPitcherAction,
   undoPlayAction,
-  finalizeGameAction,
 } from "@/app/actions/kickball";
 import { Diamond } from "@/components/diamond";
+import { EndGameButton } from "@/components/end-game-button";
 import { Button } from "@/components/ui/button";
 import { currentKicker, currentPitcher, offenseFor, suggestRunnerMoves } from "@/lib/kickball/engine";
 import {
@@ -136,15 +136,7 @@ export function ScoringConsole({
               >
                 Undo last
               </Button>
-              <Button
-                type="button"
-                variant="secondary"
-                size="sm"
-                disabled={pending}
-                onClick={() => startTransition(() => finalizeGameAction(game.id))}
-              >
-                Final
-              </Button>
+              <EndGameButton gameId={game.id} />
             </div>
           </div>
 

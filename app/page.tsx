@@ -3,6 +3,7 @@ import { Scoreboard } from "@/components/scoreboard";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { isAdmin } from "@/lib/admin";
+import { formatGameDateTime } from "@/lib/kickball/datetime";
 import { TEAM_NAME } from "@/lib/kickball/labels";
 import { getStore, playsForGame, teamRecord } from "@/lib/store";
 
@@ -129,13 +130,7 @@ function GameBlurb({
     <div className="space-y-2">
       <p className="font-medium">vs {opponent}</p>
       <p className="text-sm text-muted-foreground">
-        {new Date(when).toLocaleString(undefined, {
-          weekday: "short",
-          month: "short",
-          day: "numeric",
-          hour: "numeric",
-          minute: "2-digit",
-        })}
+        {formatGameDateTime(when)}
       </p>
       <p className="text-sm">{where}</p>
       <Link className="text-sm text-primary hover:underline" href={href}>

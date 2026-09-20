@@ -22,7 +22,6 @@ export function KickingTable({ rows }: { rows: KickingRow[] }) {
             <tr key={row.playerId} className="border-t">
               <td className="px-2 py-2 font-medium">
                 <Link className="hover:underline" href={`/stats/${row.playerId}`}>
-                  {row.number ? `#${row.number} ` : ""}
                   {row.name}
                 </Link>
               </td>

@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { startGameAction } from "@/app/actions/kickball";
+import { EndGameButton } from "@/components/end-game-button";
 import { PlayLog } from "@/components/play-log";
 import { Scoreboard } from "@/components/scoreboard";
 import { ScoringConsole } from "@/components/scoring-console";
@@ -31,6 +32,7 @@ export default async function ScorePage({
           <Button asChild variant="outline">
             <Link href={`/games/${game.id}`}>Public view</Link>
           </Button>
+          {game.status !== "final" ? <EndGameButton gameId={game.id} /> : null}
         </div>
       </div>
       <Scoreboard game={game} plays={plays} compact />

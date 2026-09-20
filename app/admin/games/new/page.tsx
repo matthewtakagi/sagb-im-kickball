@@ -21,7 +21,8 @@ export default async function NewGamePage() {
           </div>
           <div className="space-y-2">
             <Label htmlFor="time">Time</Label>
-            <Input id="time" name="time" type="time" defaultValue="18:00" />
+            <Input id="time" name="time" type="time" defaultValue="16:00" />
+            <p className="text-xs text-muted-foreground">Pacific Time</p>
           </div>
         </div>
         <div className="space-y-2">

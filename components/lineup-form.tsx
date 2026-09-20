@@ -2,7 +2,7 @@ import { saveLineupAction } from "@/app/actions/kickball";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { POSITION_LABELS } from "@/lib/kickball/labels";
-import { POSITIONS, type Game, type LineupPosition, type Player } from "@/lib/kickball/types";
+import { POSITIONS, playerPositions, type Game, type LineupPosition, type Player } from "@/lib/kickball/types";
 
 const POS: LineupPosition[] = [...POSITIONS, "EH", "BENCH"];
 
@@ -31,10 +31,7 @@ export function LineupForm({ game, players }: { game: Game; players: Player[] })
                 const slot = game.ourLineup.find((s) => s.playerId === player.id);
                 return (
                   <tr key={player.id} className="border-t">
-                    <td className="px-3 py-2">
-                      {player.number ? `#${player.number} ` : ""}
-                      {player.name}
-                    </td>
+                    <td className="px-3 py-2">{player.name}</td>
                     <td className="px-3 py-2">
                       <Input
                         name={`order-${player.id}`}
@@ -48,7 +45,7 @@ export function LineupForm({ game, players }: { game: Game; players: Player[] })
                     <td className="px-3 py-2">
                       <select
                         name={`pos-${player.id}`}
-                        defaultValue={slot?.position ?? player.primaryPosition}
+                        defaultValue={slot?.position ?? playerPositions(player)[0]}
                         className="h-9 rounded-md border bg-background px-2"
                       >
                         {POS.map((pos) => (

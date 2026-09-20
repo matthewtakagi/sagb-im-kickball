@@ -126,9 +126,16 @@ export type Player = {
   throws: "R" | "L";
   bats: "R" | "L";
   primaryPosition: LineupPosition;
+  positions: LineupPosition[];
   active: boolean;
   createdAt: string;
 };
+
+export function playerPositions(player: Pick<Player, "primaryPosition" | "positions">): LineupPosition[] {
+  const listed = player.positions?.filter(Boolean) ?? [];
+  if (listed.length) return listed;
+  return [player.primaryPosition || "EH"];
+}
 
 export type Play = {
   id: string;

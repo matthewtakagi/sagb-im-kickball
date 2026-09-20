@@ -1,11 +1,9 @@
 import { createClient } from "@supabase/supabase-js";
+import { supabaseAnonKey, supabaseServiceKey, supabaseUrl } from "@/lib/supabase/env";
 
 export function createAdminClient() {
-  const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
-  const key =
-    process.env.SUPABASE_SERVICE_ROLE_KEY ??
-    process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY ??
-    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+  const url = supabaseUrl();
+  const key = supabaseServiceKey() || supabaseAnonKey();
 
   if (!url || !key) {
     throw new Error(
@@ -22,5 +20,5 @@ export function createAdminClient() {
 }
 
 export function hasServiceRoleKey() {
-  return Boolean(process.env.SUPABASE_SERVICE_ROLE_KEY);
+  return Boolean(supabaseServiceKey());
 }

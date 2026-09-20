@@ -28,10 +28,7 @@ export default async function PlayerStatsPage({
         <Link href="/stats" className="text-sm text-muted-foreground hover:underline">
           All stats
         </Link>
-        <h1 className="text-2xl font-semibold">
-          {player.number ? `#${player.number} ` : ""}
-          {player.name}
-        </h1>
+        <h1 className="text-2xl font-semibold">{player.name}</h1>
       </div>
       {kicking.length ? (
         <section className="space-y-3">

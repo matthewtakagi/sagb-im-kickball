@@ -76,3 +76,11 @@ export const POSITION_LABELS: Record<LineupPosition, string> = {
 };
 
 export const TEAM_NAME = "SAGB";
+
+export function formatPlayerPositions(player: {
+  primaryPosition: LineupPosition;
+  positions?: LineupPosition[];
+}) {
+  const positions = player.positions?.length ? player.positions : [player.primaryPosition];
+  return positions.map((pos) => POSITION_LABELS[pos] ?? pos).join(" / ");
+}

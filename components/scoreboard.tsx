@@ -61,24 +61,46 @@ export function Scoreboard({
           </tr>
         </thead>
         <tbody>
-          <Line
-            name={TEAM_NAME}
-            cells={us}
-            runs={game.state.ourScore}
-            hits={boxHits(plays, "us")}
-            errors={boxErrors(plays, "them")}
-            compact={compact}
-            active={game.status === "live" && ((game.isHome && game.state.half === "bottom") || (!game.isHome && game.state.half === "top"))}
-          />
-          <Line
-            name={game.opponentName}
-            cells={them}
-            runs={game.state.theirScore}
-            hits={boxHits(plays, "them")}
-            errors={boxErrors(plays, "us")}
-            compact={compact}
-            active={game.status === "live" && ((game.isHome && game.state.half === "top") || (!game.isHome && game.state.half === "bottom"))}
-          />
+          {(game.isHome
+            ? [
+                {
+                  name: game.opponentName,
+                  cells: them,
+                  runs: game.state.theirScore,
+                  hits: boxHits(plays, "them"),
+                  errors: boxErrors(plays, "us"),
+                  active: game.status === "live" && game.state.half === "top",
+                },
+                {
+                  name: TEAM_NAME,
+                  cells: us,
+                  runs: game.state.ourScore,
+                  hits: boxHits(plays, "us"),
+                  errors: boxErrors(plays, "them"),
+                  active: game.status === "live" && game.state.half === "bottom",
+                },
+              ]
+            : [
+                {
+                  name: TEAM_NAME,
+                  cells: us,
+                  runs: game.state.ourScore,
+                  hits: boxHits(plays, "us"),
+                  errors: boxErrors(plays, "them"),
+                  active: game.status === "live" && game.state.half === "top",
+                },
+                {
+                  name: game.opponentName,
+                  cells: them,
+                  runs: game.state.theirScore,
+                  hits: boxHits(plays, "them"),
+                  errors: boxErrors(plays, "us"),
+                  active: game.status === "live" && game.state.half === "bottom",
+                },
+              ]
+          ).map((row) => (
+            <Line key={row.name} compact={compact} {...row} />
+          ))}
         </tbody>
       </table>
     </div>
