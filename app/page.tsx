@@ -26,7 +26,7 @@ export default async function HomePage() {
           <p className="text-sm uppercase tracking-wide text-primary">IM Kickball</p>
           <h1 className="text-3xl font-semibold tracking-tight">{TEAM_NAME}</h1>
           <p className="mt-1 text-muted-foreground">
-            Schedule, lineups, live play-by-play, and kicking / pitching / fielding stats.
+            Schedule, lineups, live play-by-play, and stats.
           </p>
         </div>
         <p className="text-2xl font-semibold tabular-nums">

@@ -18,9 +18,7 @@ export default async function AdminLoginPage({
       <div>
         <h1 className="text-2xl font-semibold">Admin</h1>
         <p className="text-sm text-muted-foreground">
-          Scoring, lineups, and roster edits are PIN-protected. In local development the PIN is{" "}
-          <code className="rounded bg-muted px-1">sagb</code> unless you set{" "}
-          <code className="rounded bg-muted px-1">ADMIN_PIN</code>.
+          Scoring, lineups, and roster edits are PIN-protected.
         </p>
       </div>
       {error ? <p className="text-sm text-destructive">{error}</p> : null}
