@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
 import { Geist } from "next/font/google";
 import { ThemeProvider } from "next-themes";
+import { Suspense } from "react";
+import { SiteHeader } from "@/components/site-header";
+import { isAdmin } from "@/lib/admin";
 import "./globals.css";
 
 const defaultUrl = process.env.VERCEL_URL
@@ -9,8 +12,8 @@ const defaultUrl = process.env.VERCEL_URL
 
 export const metadata: Metadata = {
   metadataBase: new URL(defaultUrl),
-  title: "Next.js and Supabase Starter Kit",
-  description: "The fastest way to build apps with Next.js and Supabase",
+  title: "SAGB Kickball",
+  description: "Schedule, live scoring, and stats for SAGB IM kickball",
 };
 
 const geistSans = Geist({
@@ -19,6 +22,11 @@ const geistSans = Geist({
   subsets: ["latin"],
 });
 
+async function Header() {
+  const admin = await isAdmin();
+  return <SiteHeader admin={admin} />;
+}
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -26,14 +34,17 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={`${geistSans.className} antialiased`}>
+      <body className={`${geistSans.className} min-h-screen antialiased`}>
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
           enableSystem
           disableTransitionOnChange
         >
-          {children}
+          <Suspense fallback={<div className="h-14 border-b" />}>
+            <Header />
+          </Suspense>
+          <main className="mx-auto w-full max-w-6xl px-4 py-8">{children}</main>
         </ThemeProvider>
       </body>
     </html>
