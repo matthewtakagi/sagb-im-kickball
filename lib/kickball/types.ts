@@ -131,8 +131,11 @@ export type Player = {
   createdAt: string;
 };
 
-export function playerPositions(player: Pick<Player, "primaryPosition" | "positions">): LineupPosition[] {
-  const listed = player.positions?.filter(Boolean) ?? [];
+export function playerPositions(player: {
+  primaryPosition?: LineupPosition;
+  positions?: LineupPosition[] | null;
+}): LineupPosition[] {
+  const listed = (player.positions ?? []).filter(Boolean);
   if (listed.length) return listed;
   return [player.primaryPosition || "EH"];
 }

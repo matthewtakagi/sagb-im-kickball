@@ -16,26 +16,51 @@ const empty: StoreData = { players: [], games: [], plays: [] };
 let writeChain: Promise<unknown> = Promise.resolve();
 let didSeed = false;
 
-function normalizePlayer(player: Player): Player {
-  const positions = playerPositions(player);
+type RawPlayer = {
+  id?: string;
+  name?: string;
+  number?: string;
+  throws?: string;
+  bats?: string;
+  primaryPosition?: string;
+  positions?: string[];
+  active?: boolean;
+  createdAt?: string;
+};
+
+function normalizePlayer(player: RawPlayer): Player {
+  const positions = playerPositions({
+    primaryPosition: (player.primaryPosition as Player["primaryPosition"]) || "EH",
+    positions: (player.positions ?? []) as Player["positions"],
+  });
   return {
-    ...player,
+    id: player.id ?? crypto.randomUUID(),
+    name: player.name?.trim() ?? "",
     number: player.number ?? "",
+    throws: player.throws === "L" ? "L" : "R",
+    bats: player.bats === "L" ? "L" : "R",
     positions,
     primaryPosition: positions[0] ?? "EH",
+    active: player.active ?? true,
+    createdAt: player.createdAt ?? new Date().toISOString(),
   };
 }
 
-function normalizeStore(parsed: Partial<StoreData> | null | undefined): StoreData {
+function normalizeStore(parsed: unknown): StoreData {
+  const data = (parsed && typeof parsed === "object" ? parsed : {}) as {
+    players?: RawPlayer[];
+    games?: StoreData["games"];
+    plays?: StoreData["plays"];
+  };
   return {
-    players: (parsed?.players ?? []).map(normalizePlayer),
-    games: parsed?.games ?? [],
-    plays: parsed?.plays ?? [],
+    players: (data.players ?? []).map(normalizePlayer),
+    games: data.games ?? [],
+    plays: data.plays ?? [],
   };
 }
 
 function bundledSeed(): StoreData {
-  return normalizeStore(seedData as StoreData);
+  return normalizeStore(seedData);
 }
 
 function isEmpty(store: StoreData) {
@@ -59,7 +84,7 @@ async function readStore(): Promise<StoreData> {
     return bundledSeed();
   }
 
-  const store = normalizeStore((data?.data as StoreData | undefined) ?? empty);
+  const store = normalizeStore(data?.data ?? empty);
 
   if (!didSeed && isEmpty(store) && hasServiceRoleKey()) {
     const seed = bundledSeed();
@@ -155,7 +180,7 @@ export function newPlayer(partial: {
   primaryPosition?: Player["primaryPosition"];
 }): Player {
   const positions = playerPositions({
-    positions: partial.positions,
+    positions: partial.positions ?? [],
     primaryPosition: partial.primaryPosition ?? "EH",
   });
   return {

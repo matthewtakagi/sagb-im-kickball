@@ -17,8 +17,10 @@ function isHit(result: PAResult) {
   return HITS.includes(result);
 }
 
+const INFINITE_RATE = 99.99;
+
 function avg(n: number, d: number) {
-  if (!d) return 0;
+  if (!d) return INFINITE_RATE;
   return n / d;
 }
 
@@ -238,10 +240,10 @@ export function pitchingStats(players: Player[], plays: Play[]): PitchingRow[] {
   for (const row of byId.values()) {
     row.g = gamesPlayed.get(row.playerId)?.size ?? 0;
     const ip = row.ipOuts / 3;
-    row.era = ip ? (row.er * 7) / ip : 0;
-    row.whip = ip ? (row.h + row.bb) / ip : 0;
-    row.k9 = ip ? (row.k * 7) / ip : 0;
-    row.bb9 = ip ? (row.bb * 7) / ip : 0;
+    row.era = ip ? (row.er * 7) / ip : INFINITE_RATE;
+    row.whip = ip ? (row.h + row.bb) / ip : INFINITE_RATE;
+    row.k9 = ip ? (row.k * 7) / ip : INFINITE_RATE;
+    row.bb9 = ip ? (row.bb * 7) / ip : INFINITE_RATE;
     const ab = row.tbf - row.bb;
     row.avgAgainst = avg(row.h, Math.max(ab, 0));
   }
@@ -287,13 +289,14 @@ export function fieldingStats(players: Player[], plays: Play[]): FieldingRow[] {
   for (const row of byId.values()) {
     row.dp = dps.get(row.playerId) ?? 0;
     const chances = row.po + row.a + row.e;
-    row.fpct = chances ? (row.po + row.a) / chances : 0;
+    row.fpct = chances ? (row.po + row.a) / chances : INFINITE_RATE;
   }
 
   return [...byId.values()].sort((a, b) => b.po + b.a - (a.po + a.a));
 }
 
 export function formatAvg(n: number) {
+  if (n === INFINITE_RATE) return "99.99";
   return fmtAvg(n);
 }
 
@@ -304,5 +307,10 @@ export function formatIp(outs: number) {
 }
 
 export function formatEra(n: number) {
-  return n.toFixed(2);
+  return formatRate(n, 2);
+}
+
+export function formatRate(n: number, digits: number) {
+  if (!Number.isFinite(n) || n >= INFINITE_RATE) return "99.99";
+  return n.toFixed(digits);
 }

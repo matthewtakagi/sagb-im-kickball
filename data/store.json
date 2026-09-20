@@ -7,6 +7,7 @@
       "throws": "R",
       "bats": "L",
       "primaryPosition": "P",
+      "positions": ["P"],
       "active": true,
       "createdAt": "2026-09-20T09:52:57.558Z"
     },
@@ -17,6 +18,7 @@
       "throws": "R",
       "bats": "R",
       "primaryPosition": "1B",
+      "positions": ["1B"],
       "active": true,
       "createdAt": "2026-09-20T09:53:07.500Z"
     },
@@ -27,6 +29,7 @@
       "throws": "R",
       "bats": "R",
       "primaryPosition": "SS",
+      "positions": ["SS"],
       "active": true,
       "createdAt": "2026-09-20T09:53:13.074Z"
     },
@@ -37,6 +40,7 @@
       "throws": "R",
       "bats": "R",
       "primaryPosition": "LCF",
+      "positions": ["LCF"],
       "active": true,
       "createdAt": "2026-09-20T09:53:24.724Z"
     },
@@ -47,6 +51,7 @@
       "throws": "R",
       "bats": "R",
       "primaryPosition": "3B",
+      "positions": ["3B"],
       "active": true,
       "createdAt": "2026-09-20T10:09:22.821Z"
     }

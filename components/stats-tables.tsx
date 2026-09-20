@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { formatAvg, formatEra, formatIp, type FieldingRow, type KickingRow, type PitchingRow } from "@/lib/kickball/stats";
+import { formatAvg, formatEra, formatIp, formatRate, type FieldingRow, type KickingRow, type PitchingRow } from "@/lib/kickball/stats";
 
 export function KickingTable({ rows }: { rows: KickingRow[] }) {
   if (rows.length === 0) return <Empty />;
@@ -85,9 +85,9 @@ export function PitchingTable({ rows }: { rows: PitchingRow[] }) {
               <Num n={row.hr} />
               <Num n={row.pitches} />
               <td className="px-2 py-2 tabular-nums">{formatEra(row.era)}</td>
-              <td className="px-2 py-2 tabular-nums">{row.whip.toFixed(2)}</td>
-              <td className="px-2 py-2 tabular-nums">{row.k9.toFixed(1)}</td>
-              <td className="px-2 py-2 tabular-nums">{row.bb9.toFixed(1)}</td>
+              <td className="px-2 py-2 tabular-nums">{formatEra(row.whip)}</td>
+              <td className="px-2 py-2 tabular-nums">{formatRate(row.k9, 1)}</td>
+              <td className="px-2 py-2 tabular-nums">{formatRate(row.bb9, 1)}</td>
               <td className="px-2 py-2 tabular-nums">{formatAvg(row.avgAgainst)}</td>
             </tr>
           ))}
