@@ -75,7 +75,7 @@ export function ScoringConsole({
   const runnerMoves = moves ?? suggested;
 
   const fielders = game.ourLineup
-    .filter((s) => s.position !== "BENCH" && s.position !== "EH")
+    .filter((s) => s.position !== "BENCH" && s.position !== "DH" && s.position !== "EH")
     .map((s) => {
       const player = players.find((p) => p.id === s.playerId);
       return { id: s.playerId, name: player?.name ?? "Unknown", position: s.position };
@@ -164,13 +164,12 @@ export function ScoringConsole({
           <p className="mb-2 text-xs font-medium uppercase tracking-wide text-muted-foreground">
             Pitch
           </p>
-          <div className="grid grid-cols-4 gap-2">
+          <div className="grid grid-cols-3 gap-2">
             {(
               [
                 ["ball", "Ball"],
                 ["strike", "Strike"],
                 ["foul", "Foul"],
-                ["hbp", "HBP"],
               ] as const
             ).map(([type, label]) => (
               <Button

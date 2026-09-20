@@ -12,7 +12,7 @@ export const POSITIONS = [
 ] as const;
 
 export type Position = (typeof POSITIONS)[number];
-export type LineupPosition = Position | "EH" | "BENCH";
+export type LineupPosition = Position | "DH" | "EH" | "BENCH";
 
 export type PitchType = "ball" | "strike" | "foul" | "in_play" | "hbp";
 
@@ -131,13 +131,22 @@ export type Player = {
   createdAt: string;
 };
 
+export function canonicalizePosition(pos?: string | null): Exclude<LineupPosition, "EH"> {
+  if (pos === "EH") return "DH";
+  if (pos === "BENCH" || pos === "DH") return pos;
+  if (pos && (POSITIONS as readonly string[]).includes(pos)) return pos as Position;
+  return "DH";
+}
+
 export function playerPositions(player: {
   primaryPosition?: LineupPosition;
   positions?: LineupPosition[] | null;
 }): LineupPosition[] {
-  const listed = (player.positions ?? []).filter(Boolean);
+  const listed = (player.positions ?? [])
+    .map((pos) => canonicalizePosition(pos))
+    .filter((pos) => pos !== "BENCH");
   if (listed.length) return listed;
-  return [player.primaryPosition || "EH"];
+  return [canonicalizePosition(player.primaryPosition)];
 }
 
 export type Play = {

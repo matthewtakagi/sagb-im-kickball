@@ -10,6 +10,7 @@ import {
 } from "@/lib/kickball/engine";
 import { pacificWallClockToIso } from "@/lib/kickball/datetime";
 import {
+  canonicalizePosition,
   initialState,
   POSITIONS,
   type LineupPosition,
@@ -64,12 +65,13 @@ export async function adminLogoutAction() {
 }
 
 function parsePositions(formData: FormData): LineupPosition[] {
-  const allowed = new Set<string>([...POSITIONS, "EH"]);
+  const allowed = new Set<string>([...POSITIONS, "DH", "EH"]);
   const positions = formData
     .getAll("positions")
     .map(String)
-    .filter((pos): pos is LineupPosition => allowed.has(pos));
-  return positions.length ? positions : ["EH"];
+    .filter((pos) => allowed.has(pos))
+    .map((pos) => canonicalizePosition(pos));
+  return positions.length ? positions : ["DH"];
 }
 
 export async function createPlayerAction(formData: FormData) {
@@ -102,7 +104,7 @@ export async function updatePlayerAction(formData: FormData) {
     player.throws = formData.get("throws") === "L" ? "L" : "R";
     player.bats = formData.get("bats") === "L" ? "L" : "R";
     player.positions = positions;
-    player.primaryPosition = positions[0] ?? "EH";
+    player.primaryPosition = positions[0] ?? "DH";
     player.number = "";
   });
   refreshAll();
@@ -150,7 +152,7 @@ export async function saveLineupAction(gameId: string, formData: FormData) {
     const position = String(formData.get(`pos-${id}`) ?? "BENCH") as LineupSlot["position"];
     if (!order && position === "BENCH") continue;
     if (order > 0) {
-      ourLineup.push({ playerId: id, order, position: position || "EH" });
+      ourLineup.push({ playerId: id, order, position: canonicalizePosition(position || "DH") });
     }
   }
   ourLineup.sort((a, b) => a.order - b.order);
@@ -214,8 +216,7 @@ export async function recordPitchAction(gameId: string, type: Pitch["type"]) {
     const game = store.games.find((g) => g.id === gameId);
     if (!game || game.status !== "live") throw new Error("Game is not live.");
     game.state = applyPitch(game.state, type);
-    if (type === "hbp") auto = "hit_by_pitch";
-    else if (game.state.balls >= 4) auto = "walk";
+    if (game.state.balls >= 4) auto = "walk";
     else if (game.state.strikes >= 3) auto = "strikeout";
   });
   if (auto) {

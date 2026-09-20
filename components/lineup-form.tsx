@@ -4,7 +4,7 @@ import { Input } from "@/components/ui/input";
 import { POSITION_LABELS } from "@/lib/kickball/labels";
 import { POSITIONS, playerPositions, type Game, type LineupPosition, type Player } from "@/lib/kickball/types";
 
-const POS: LineupPosition[] = [...POSITIONS, "EH", "BENCH"];
+const POS: LineupPosition[] = [...POSITIONS, "DH", "BENCH"];
 
 export function LineupForm({ game, players }: { game: Game; players: Player[] }) {
   const active = players.filter((p) => p.active);
@@ -45,7 +45,11 @@ export function LineupForm({ game, players }: { game: Game; players: Player[] })
                     <td className="px-3 py-2">
                       <select
                         name={`pos-${player.id}`}
-                        defaultValue={slot?.position ?? playerPositions(player)[0]}
+                        defaultValue={
+                          slot?.position === "EH"
+                            ? "DH"
+                            : (slot?.position ?? playerPositions(player)[0])
+                        }
                         className="h-9 rounded-md border bg-background px-2"
                       >
                         {POS.map((pos) => (

@@ -38,7 +38,7 @@ export default async function AdminRosterPage() {
         <div className="sm:col-span-2 lg:col-span-6">
           <Label>Positions</Label>
           <div className="mt-2">
-            <PositionCheckboxes selected={["EH"]} />
+            <PositionCheckboxes selected={["DH"]} />
           </div>
         </div>
         <div className="flex items-end">

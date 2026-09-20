@@ -2,6 +2,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { startGameAction } from "@/app/actions/kickball";
 import { EndGameButton } from "@/components/end-game-button";
+import { GameLines } from "@/components/game-lines";
 import { PlayLog } from "@/components/play-log";
 import { Scoreboard } from "@/components/scoreboard";
 import { ScoringConsole } from "@/components/scoring-console";
@@ -36,6 +37,7 @@ export default async function ScorePage({
         </div>
       </div>
       <Scoreboard game={game} plays={plays} compact />
+      <GameLines game={game} players={store.players} plays={plays} />
       {game.status === "scheduled" ? (
         <form action={startGameAction.bind(null, game.id)}>
           <Button type="submit">Start game</Button>

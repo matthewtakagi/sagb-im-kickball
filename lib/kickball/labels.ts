@@ -71,7 +71,8 @@ export const POSITION_LABELS: Record<LineupPosition, string> = {
   LCF: "Left center",
   RCF: "Right center",
   RF: "Right field",
-  EH: "Extra hitter",
+  DH: "Designated hitter",
+  EH: "Designated hitter",
   BENCH: "Bench",
 };
 
@@ -81,6 +82,8 @@ export function formatPlayerPositions(player: {
   primaryPosition: LineupPosition;
   positions?: LineupPosition[];
 }) {
-  const positions = player.positions?.length ? player.positions : [player.primaryPosition];
-  return positions.map((pos) => POSITION_LABELS[pos] ?? pos).join(" / ");
+  const positions = (player.positions?.length ? player.positions : [player.primaryPosition]).map((pos) =>
+    pos === "EH" ? "DH" : pos,
+  );
+  return [...new Set(positions)].map((pos) => POSITION_LABELS[pos] ?? pos).join(" / ");
 }

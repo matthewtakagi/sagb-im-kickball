@@ -51,7 +51,6 @@ export type KickingRow = {
   bb: number;
   k: number;
   sf: number;
-  hbp: number;
   tb: number;
   avg: number;
   obp: number;
@@ -121,7 +120,6 @@ export function kickingStats(players: Player[], _games: Game[], plays: Play[]): 
         bb: 0,
         k: 0,
         sf: 0,
-        hbp: 0,
         tb: 0,
         avg: 0,
         obp: 0,
@@ -156,7 +154,6 @@ export function kickingStats(players: Player[], _games: Game[], plays: Play[]): 
     if (play.result === "walk") row.bb += 1;
     if (play.result === "strikeout") row.k += 1;
     if (play.result === "sacrifice_fly") row.sf += 1;
-    if (play.result === "hit_by_pitch") row.hbp += 1;
     row.rbi += play.rbi;
     if (play.result === "single") row.tb += 1;
     if (play.result === "double") row.tb += 2;
@@ -181,12 +178,12 @@ export function kickingStats(players: Player[], _games: Game[], plays: Play[]): 
   for (const row of byId.values()) {
     row.g = gamesPlayed.get(row.playerId)?.size ?? 0;
     row.avg = avg(row.h, row.ab);
-    row.obp = avg(row.h + row.bb + row.hbp, row.pa);
+    row.obp = avg(row.h + row.bb, row.pa);
     row.slg = avg(row.tb, row.ab);
     row.ops = row.obp + row.slg;
     row.iso = row.slg - row.avg;
-    const babipDenom = row.ab - row.k - row.hr + row.sf;
-    row.babip = avg(row.h - row.hr, babipDenom);
+    const babipDenom = row.ab - row.k + row.sf;
+    row.babip = avg(row.h, babipDenom);
   }
 
   return [...byId.values()]

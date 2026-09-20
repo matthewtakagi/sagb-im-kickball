@@ -1,12 +1,15 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Diamond } from "@/components/diamond";
+import { GameLines } from "@/components/game-lines";
 import { LivePoller } from "@/components/live-poller";
 import { PlayLog } from "@/components/play-log";
 import { Scoreboard } from "@/components/scoreboard";
 import { Button } from "@/components/ui/button";
 import { isAdmin } from "@/lib/admin";
 import { currentKicker } from "@/lib/kickball/engine";
+import { POSITION_LABELS } from "@/lib/kickball/labels";
+import { canonicalizePosition } from "@/lib/kickball/types";
 import { getStore, playsForGame } from "@/lib/store";
 
 export default async function GamePage({
@@ -42,6 +45,7 @@ export default async function GamePage({
         ) : null}
       </div>
       <Scoreboard game={game} plays={plays} />
+      <GameLines game={game} players={store.players} plays={plays} />
       <div className="grid gap-6 lg:grid-cols-2">
         <Diamond
           bases={game.state.bases}
@@ -61,7 +65,9 @@ export default async function GamePage({
                 return (
                   <li key={slot.playerId}>
                     {slot.order}. {player?.name ?? "Unknown"}{" "}
-                    <span className="text-muted-foreground">{slot.position}</span>
+                    <span className="text-muted-foreground">
+                      {POSITION_LABELS[canonicalizePosition(slot.position)]}
+                    </span>
                   </li>
                 );
               })}

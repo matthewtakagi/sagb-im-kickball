@@ -1,8 +1,8 @@
 import Link from "next/link";
 import { formatAvg, formatEra, formatIp, type FieldingRow, type KickingRow, type PitchingRow } from "@/lib/kickball/stats";
 
-export function KickingTable({ rows }: { rows: KickingRow[] }) {
-  if (rows.length === 0) return <Empty />;
+export function KickingTable({ rows, empty }: { rows: KickingRow[]; empty?: string }) {
+  if (rows.length === 0) return <Empty text={empty} />;
   return (
     <div className="overflow-x-auto rounded-xl border">
       <table className="w-full min-w-[860px] text-left text-sm">
@@ -50,8 +50,8 @@ export function KickingTable({ rows }: { rows: KickingRow[] }) {
   );
 }
 
-export function PitchingTable({ rows }: { rows: PitchingRow[] }) {
-  if (rows.length === 0) return <Empty text="No pitching stats yet. They appear when the other team kicks." />;
+export function PitchingTable({ rows, empty }: { rows: PitchingRow[]; empty?: string }) {
+  if (rows.length === 0) return <Empty text={empty ?? "No pitching stats yet. They appear when the other team kicks."} />;
   return (
     <div className="overflow-x-auto rounded-xl border">
       <table className="w-full min-w-[720px] text-left text-sm">

@@ -3,6 +3,7 @@ import seedData from "@/data/store.json";
 import { createAdminClient, hasServiceRoleKey } from "@/lib/supabase/admin";
 import { hasSupabaseConfig } from "@/lib/supabase/env";
 import {
+  canonicalizePosition,
   initialState,
   playerPositions,
   type Game,
@@ -30,7 +31,7 @@ type RawPlayer = {
 
 function normalizePlayer(player: RawPlayer): Player {
   const positions = playerPositions({
-    primaryPosition: (player.primaryPosition as Player["primaryPosition"]) || "EH",
+    primaryPosition: (player.primaryPosition as Player["primaryPosition"]) || "DH",
     positions: (player.positions ?? []) as Player["positions"],
   });
   return {
@@ -40,7 +41,7 @@ function normalizePlayer(player: RawPlayer): Player {
     throws: player.throws === "L" ? "L" : "R",
     bats: player.bats === "L" ? "L" : "R",
     positions,
-    primaryPosition: positions[0] ?? "EH",
+    primaryPosition: positions[0] ?? "DH",
     active: player.active ?? true,
     createdAt: player.createdAt ?? new Date().toISOString(),
   };
@@ -54,7 +55,13 @@ function normalizeStore(parsed: unknown): StoreData {
   };
   return {
     players: (data.players ?? []).map(normalizePlayer),
-    games: data.games ?? [],
+    games: (data.games ?? []).map((game) => ({
+      ...game,
+      ourLineup: (game.ourLineup ?? []).map((slot) => ({
+        ...slot,
+        position: canonicalizePosition(slot.position),
+      })),
+    })),
     plays: data.plays ?? [],
   };
 }
@@ -181,7 +188,7 @@ export function newPlayer(partial: {
 }): Player {
   const positions = playerPositions({
     positions: partial.positions ?? [],
-    primaryPosition: partial.primaryPosition ?? "EH",
+    primaryPosition: partial.primaryPosition ?? "DH",
   });
   return {
     id: crypto.randomUUID(),
@@ -190,7 +197,7 @@ export function newPlayer(partial: {
     throws: partial.throws ?? "R",
     bats: partial.bats ?? "R",
     positions,
-    primaryPosition: positions[0] ?? "EH",
+    primaryPosition: positions[0] ?? "DH",
     active: true,
     createdAt: new Date().toISOString(),
   };

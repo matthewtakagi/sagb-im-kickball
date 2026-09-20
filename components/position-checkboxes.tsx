@@ -1,14 +1,14 @@
 import { POSITION_LABELS } from "@/lib/kickball/labels";
-import { POSITIONS, type LineupPosition } from "@/lib/kickball/types";
+import { POSITIONS, canonicalizePosition, type LineupPosition } from "@/lib/kickball/types";
 
-const POS: LineupPosition[] = [...POSITIONS, "EH"];
+const POS: Exclude<LineupPosition, "EH">[] = [...POSITIONS, "DH"];
 
 export function PositionCheckboxes({
   selected,
 }: {
   selected?: LineupPosition[];
 }) {
-  const chosen = new Set(selected ?? []);
+  const chosen = new Set((selected ?? []).map((pos) => canonicalizePosition(pos)));
   return (
     <div className="flex flex-wrap gap-x-3 gap-y-1">
       {POS.map((pos) => (
