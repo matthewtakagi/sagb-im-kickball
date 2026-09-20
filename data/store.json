@@ -1,5 +1,88 @@
 {
   "players": [],
-  "games": [],
+  "games": [
+    {
+      "id": "442d3868-862e-489f-b502-e76394a5192b",
+      "opponentName": "Eigenballers",
+      "startsAt": "2026-09-21T00:00:00.000Z",
+      "location": "Maxwell",
+      "notes": "",
+      "isHome": true,
+      "inningsScheduled": 7,
+      "status": "scheduled",
+      "ourLineup": [],
+      "theirLineup": [
+        {
+          "id": "442d3868-862e-489f-b502-e76394a5192b-opp-1",
+          "name": "Opp 1",
+          "order": 1
+        },
+        {
+          "id": "442d3868-862e-489f-b502-e76394a5192b-opp-2",
+          "name": "Opp 2",
+          "order": 2
+        },
+        {
+          "id": "442d3868-862e-489f-b502-e76394a5192b-opp-3",
+          "name": "Opp 3",
+          "order": 3
+        },
+        {
+          "id": "442d3868-862e-489f-b502-e76394a5192b-opp-4",
+          "name": "Opp 4",
+          "order": 4
+        },
+        {
+          "id": "442d3868-862e-489f-b502-e76394a5192b-opp-5",
+          "name": "Opp 5",
+          "order": 5
+        },
+        {
+          "id": "442d3868-862e-489f-b502-e76394a5192b-opp-6",
+          "name": "Opp 6",
+          "order": 6
+        },
+        {
+          "id": "442d3868-862e-489f-b502-e76394a5192b-opp-7",
+          "name": "Opp 7",
+          "order": 7
+        },
+        {
+          "id": "442d3868-862e-489f-b502-e76394a5192b-opp-8",
+          "name": "Opp 8",
+          "order": 8
+        },
+        {
+          "id": "442d3868-862e-489f-b502-e76394a5192b-opp-9",
+          "name": "Opp 9",
+          "order": 9
+        },
+        {
+          "id": "442d3868-862e-489f-b502-e76394a5192b-opp-10",
+          "name": "Opp 10",
+          "order": 10
+        }
+      ],
+      "pitcherId": null,
+      "state": {
+        "inning": 1,
+        "half": "top",
+        "outs": 0,
+        "balls": 0,
+        "strikes": 0,
+        "ourScore": 0,
+        "theirScore": 0,
+        "bases": {
+          "1": null,
+          "2": null,
+          "3": null
+        },
+        "ourKickerIndex": 0,
+        "theirKickerIndex": 0,
+        "pitches": []
+      },
+      "createdAt": "2026-09-20T09:51:28.067Z"
+    }
+  ],
   "plays": []
 }
