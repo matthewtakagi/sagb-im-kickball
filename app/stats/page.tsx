@@ -13,7 +13,7 @@ export default async function StatsPage() {
       <div>
         <h1 className="text-2xl font-semibold">Team stats</h1>
         <p className="text-sm text-muted-foreground">
-          Built from every recorded plate appearance: contact, spray, runner movement, and fielding credits.
+          If you don't like your stats, blame the official scorer
         </p>
       </div>
       <section className="space-y-3">
