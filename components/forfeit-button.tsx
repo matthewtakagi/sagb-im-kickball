@@ -21,7 +21,7 @@ export function ForfeitButton({
       onClick={() => {
         if (
           !confirm(
-            "Record an opponent forfeit? SAGB will be credited with a win, and any plays from this game will be cleared.",
+            "Record an opponent forfeit? SAGB will be credited with a 6–0 win, and any plays from this game will be cleared.",
           )
         ) {
           return;

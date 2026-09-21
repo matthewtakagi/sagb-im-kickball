@@ -119,6 +119,9 @@ export type OpponentBatter = {
 
 export type GameStatus = "scheduled" | "live" | "final";
 
+/** Runs awarded to SAGB when the opponent forfeits. */
+export const FORFEIT_SCORE = 6;
+
 export type Player = {
   id: string;
   name: string;

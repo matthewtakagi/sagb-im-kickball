@@ -13,6 +13,9 @@ export default async function AdminHomePage() {
   const upcoming = store.games
     .filter((g) => g.status === "scheduled")
     .sort((a, b) => a.startsAt.localeCompare(b.startsAt));
+  const completed = store.games
+    .filter((g) => g.status === "final")
+    .sort((a, b) => b.startsAt.localeCompare(a.startsAt));
 
   return (
     <div className="space-y-6">
@@ -65,6 +68,32 @@ export default async function AdminHomePage() {
                 </Button>
                 <EndGameButton gameId={game.id} />
                 <ForfeitButton gameId={game.id} />
+              </div>
+            </div>
+          ))
+        )}
+      </section>
+      <section className="space-y-2">
+        <h2 className="font-semibold">Completed</h2>
+        {completed.length === 0 ? (
+          <p className="text-sm text-muted-foreground">No completed games yet.</p>
+        ) : (
+          completed.map((game) => (
+            <div key={game.id} className="flex items-center justify-between rounded-xl border p-4">
+              <div>
+                <p className="font-medium">vs {game.opponentName}</p>
+                <p className="text-sm text-muted-foreground">
+                  {formatGameDateTime(game.startsAt)} · {game.state.ourScore}–{game.state.theirScore}
+                  {game.forfeitBy === "them" ? " forfeit" : ""}
+                </p>
+              </div>
+              <div className="flex gap-2">
+                <Button asChild size="sm" variant="outline">
+                  <Link href={`/games/${game.id}`}>Box</Link>
+                </Button>
+                <Button asChild size="sm">
+                  <Link href={`/admin/games/${game.id}/score`}>Score</Link>
+                </Button>
               </div>
             </div>
           ))

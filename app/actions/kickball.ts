@@ -11,6 +11,7 @@ import {
 import { pacificWallClockToIso } from "@/lib/kickball/datetime";
 import {
   canonicalizePosition,
+  FORFEIT_SCORE,
   initialState,
   POSITIONS,
   type LineupPosition,
@@ -215,10 +216,9 @@ export async function forfeitGameAction(gameId: string) {
   await updateStore((store) => {
     const game = store.games.find((g) => g.id === gameId);
     if (!game) throw new Error("Game not found.");
-    const runs = game.inningsScheduled || 7;
     game.status = "final";
     game.forfeitBy = "them";
-    game.state = { ...initialState(), ourScore: runs, theirScore: 0 };
+    game.state = { ...initialState(), ourScore: FORFEIT_SCORE, theirScore: 0 };
     store.plays = store.plays.filter((play) => play.gameId !== gameId);
   });
   refreshAll(gameId);
