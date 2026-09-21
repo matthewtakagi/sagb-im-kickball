@@ -35,9 +35,11 @@ export function Scoreboard({
           </h2>
         </div>
         <Badge variant={game.status === "live" ? "default" : "secondary"}>
-          {game.status === "live"
-            ? `${game.state.half === "top" ? "Top" : "Bot"} ${game.state.inning}`
-            : game.status}
+          {game.forfeitBy === "them"
+            ? "Forfeit win"
+            : game.status === "live"
+              ? `${game.state.half === "top" ? "Top" : "Bot"} ${game.state.inning}`
+              : game.status}
         </Badge>
       </div>
       <table className="w-full min-w-[520px] text-center text-sm">

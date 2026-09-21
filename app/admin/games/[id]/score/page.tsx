@@ -2,6 +2,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { startGameAction } from "@/app/actions/kickball";
 import { EndGameButton } from "@/components/end-game-button";
+import { ForfeitButton } from "@/components/forfeit-button";
 import { GameLines } from "@/components/game-lines";
 import { PlayLog } from "@/components/play-log";
 import { Scoreboard } from "@/components/scoreboard";
@@ -33,7 +34,12 @@ export default async function ScorePage({
           <Button asChild variant="outline">
             <Link href={`/games/${game.id}`}>Public view</Link>
           </Button>
-          {game.status !== "final" ? <EndGameButton gameId={game.id} /> : null}
+          {game.status !== "final" ? (
+            <>
+              <EndGameButton gameId={game.id} />
+              <ForfeitButton gameId={game.id} />
+            </>
+          ) : null}
         </div>
       </div>
       <Scoreboard game={game} plays={plays} compact />
@@ -43,7 +49,11 @@ export default async function ScorePage({
           <Button type="submit">Start game</Button>
         </form>
       ) : game.status === "final" ? (
-        <p className="text-sm text-muted-foreground">This game is final. Undo the last play if you still need to edit.</p>
+        <p className="text-sm text-muted-foreground">
+          {game.forfeitBy === "them"
+            ? `${game.opponentName} forfeited. SAGB is credited with a ${game.state.ourScore}–${game.state.theirScore} win.`
+            : "This game is final. Undo the last play if you still need to edit."}
+        </p>
       ) : (
         <div className="grid gap-6 xl:grid-cols-[minmax(0,1fr)_320px]">
           <ScoringConsole game={game} players={store.players} plays={plays} />

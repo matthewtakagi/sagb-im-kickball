@@ -2,6 +2,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Diamond } from "@/components/diamond";
 import { GameLines } from "@/components/game-lines";
+import { ForfeitButton } from "@/components/forfeit-button";
 import { LivePoller } from "@/components/live-poller";
 import { PlayLog } from "@/components/play-log";
 import { Scoreboard } from "@/components/scoreboard";
@@ -41,10 +42,16 @@ export default async function GamePage({
             <Button asChild>
               <Link href={`/admin/games/${game.id}/score`}>Score</Link>
             </Button>
+            {game.status !== "final" ? <ForfeitButton gameId={game.id} /> : null}
           </div>
         ) : null}
       </div>
       <Scoreboard game={game} plays={plays} />
+      {game.forfeitBy === "them" ? (
+        <p className="text-sm text-muted-foreground">
+          {game.opponentName} forfeited. SAGB wins {game.state.ourScore}–{game.state.theirScore}.
+        </p>
+      ) : null}
       <GameLines game={game} players={store.players} plays={plays} />
       <div className="grid gap-6 lg:grid-cols-2">
         <Diamond

@@ -76,7 +76,7 @@ export default async function HomePage() {
               <GameBlurb
                 opponent={last.opponentName}
                 when={last.startsAt}
-                where={`${TEAM_NAME} ${last.state.ourScore}–${last.state.theirScore}`}
+                where={`${TEAM_NAME} ${last.state.ourScore}–${last.state.theirScore}${last.forfeitBy === "them" ? " (forfeit)" : ""}`}
                 href={`/games/${last.id}`}
               />
             ) : (

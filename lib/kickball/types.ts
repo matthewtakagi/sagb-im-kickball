@@ -186,6 +186,8 @@ export type Game = {
   theirLineup: OpponentBatter[];
   pitcherId: string | null;
   state: GameState;
+  /** Opponent forfeited; SAGB is awarded the win. */
+  forfeitBy?: "them" | null;
   createdAt: string;
 };
 

@@ -57,6 +57,7 @@ function normalizeStore(parsed: unknown): StoreData {
     players: (data.players ?? []).map(normalizePlayer),
     games: (data.games ?? []).map((game) => ({
       ...game,
+      forfeitBy: game.forfeitBy === "them" ? "them" : null,
       ourLineup: (game.ourLineup ?? []).map((slot) => ({
         ...slot,
         position: canonicalizePosition(slot.position),
@@ -175,6 +176,7 @@ export function newGame(partial: {
     theirLineup: defaultOpponentLineup(id),
     pitcherId: null,
     state: initialState(),
+    forfeitBy: null,
     createdAt: new Date().toISOString(),
   };
 }
@@ -213,7 +215,7 @@ export function teamRecord(games: Game[]) {
   let t = 0;
   for (const game of games) {
     if (game.status !== "final") continue;
-    if (game.state.ourScore > game.state.theirScore) w += 1;
+    if (game.forfeitBy === "them" || game.state.ourScore > game.state.theirScore) w += 1;
     else if (game.state.ourScore < game.state.theirScore) l += 1;
     else t += 1;
   }

@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { EndGameButton } from "@/components/end-game-button";
+import { ForfeitButton } from "@/components/forfeit-button";
 import { Button } from "@/components/ui/button";
 import { requireAdmin } from "@/lib/admin";
 import { formatGameDateTime } from "@/lib/kickball/datetime";
@@ -34,7 +35,10 @@ export default async function AdminHomePage() {
               <Link href={`/admin/games/${game.id}/score`} className="min-w-0 flex-1 hover:underline">
                 vs {game.opponentName} · {game.state.ourScore}–{game.state.theirScore}
               </Link>
-              <EndGameButton gameId={game.id} />
+              <div className="flex gap-2">
+                <EndGameButton gameId={game.id} />
+                <ForfeitButton gameId={game.id} />
+              </div>
             </div>
           ))}
         </section>
@@ -60,6 +64,7 @@ export default async function AdminHomePage() {
                   <Link href={`/admin/games/${game.id}/score`}>Score</Link>
                 </Button>
                 <EndGameButton gameId={game.id} />
+                <ForfeitButton gameId={game.id} />
               </div>
             </div>
           ))

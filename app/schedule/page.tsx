@@ -37,9 +37,11 @@ export default async function SchedulePage() {
               </div>
               <div className="flex items-center gap-3">
                 <Badge variant={game.status === "live" ? "default" : "secondary"}>
-                  {game.status === "final"
-                    ? `${game.state.ourScore}–${game.state.theirScore}`
-                    : game.status}
+                  {game.forfeitBy === "them"
+                    ? `${game.state.ourScore}–${game.state.theirScore} forfeit`
+                    : game.status === "final"
+                      ? `${game.state.ourScore}–${game.state.theirScore}`
+                      : game.status}
                 </Badge>
                 <Link className="text-sm hover:underline" href={`/games/${game.id}`}>
                   Box

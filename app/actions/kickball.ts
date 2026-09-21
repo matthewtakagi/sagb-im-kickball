@@ -186,6 +186,7 @@ export async function startGameAction(gameId: string) {
   await updateStore((store) => {
     const game = store.games.find((g) => g.id === gameId);
     if (!game) throw new Error("Game not found.");
+    if (game.forfeitBy === "them") throw new Error("This game was forfeited.");
     if (game.ourLineup.filter((s) => s.position !== "BENCH").length < 1) {
       throw new Error("Set a kicking lineup before starting.");
     }
@@ -205,6 +206,20 @@ export async function finalizeGameAction(gameId: string) {
     if (!game) throw new Error("Game not found.");
     if (game.status === "final") return;
     game.status = "final";
+  });
+  refreshAll(gameId);
+}
+
+export async function forfeitGameAction(gameId: string) {
+  await requireAdmin();
+  await updateStore((store) => {
+    const game = store.games.find((g) => g.id === gameId);
+    if (!game) throw new Error("Game not found.");
+    const runs = game.inningsScheduled || 7;
+    game.status = "final";
+    game.forfeitBy = "them";
+    game.state = { ...initialState(), ourScore: runs, theirScore: 0 };
+    store.plays = store.plays.filter((play) => play.gameId !== gameId);
   });
   refreshAll(gameId);
 }
